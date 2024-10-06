@@ -1,0 +1,14 @@
+<h2>JSON Sitemap Visualizer</h2>
+<textarea id="jsonInput" rows="10" cols="30" placeholder="Paste your JSON sitemap here"></textarea>
+<button id="createButton">Create Sitemap</button>
+<div id="status"></div>
+<script>
+document.getElementById('createButton').onclick = () => {
+  const json = document.getElementById('jsonInput').value;
+  parent.postMessage({ pluginMessage: { type: 'create-sitemap', json } }, '*');
+}
+
+onmessage = (event) => {
+  document.getElementById('status').textContent = event.data.pluginMessage;
+}
+</script>
